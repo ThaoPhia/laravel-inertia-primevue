@@ -1,14 +1,89 @@
 # Laravel + PrimeVue Starter Kit
 
-## About
+## Tech Stack
 
-[![Laravel](https://img.shields.io/badge/Laravel-13-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
-[![Inertia](https://img.shields.io/badge/Inertia-v3-3068F6?logo=inertia&logoColor=white)](https://inertiajs.com)
-[![Vue](https://img.shields.io/badge/Vue-3-42B883?logo=vue.js&logoColor=white)](https://vuejs.org)
+- **Backend:** Laravel 13, PHP 8.3+, Laravel Fortify
+- **Frontend:** Vue 3, Inertia.js v3, Vite 8, TypeScript
+- **UI:** PrimeVue 4, Tailwind CSS 4, Lucide Vue icons
+- **Data and types:** Spatie Laravel Data, Spatie TypeScript Transformer
+- **Testing and quality:** PHPUnit, PHPStan/Larastan, Laravel Pint, ESLint, vue-tsc
+- **Default local database:** SQLite
 
-A basic authentication starter kit using [Laravel](https://laravel.com/docs/master), [Inertia.js](https://inertiajs.com/), [PrimeVue](https://v4.primevue.org/) components, and [Tailwind CSS](https://tailwindcss.com/).
+## Requirements
 
-Browse the [📚 **Documentation**](https://connorabbas.github.io/laravel-primevue-starter-kit-docs/) to learn more.
+- PHP 8.3 or newer
+- Composer
+- Node.js 22 or newer
+- npm
+
+## Setup
+
+Install PHP and JavaScript dependencies:
+
+```bash
+composer install
+npm install
+```
+
+Create the local environment file and application key:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+Create the default SQLite database file and run migrations:
+
+```bash
+touch database/database.sqlite
+php artisan migrate
+```
+
+On Windows PowerShell, use this command instead of `touch`:
+
+```powershell
+New-Item -ItemType File -Path database/database.sqlite -Force
+php artisan migrate
+```
+
+## Local Development
+
+Start the full development stack:
+
+```bash
+npm run dev:composer
+```
+
+This runs the Laravel server, queue listener, Vite dev server, and TypeScript transformer watcher through the Composer `dev` script.
+
+Use the frontend-only Vite server when the Laravel app is already running separately:
+
+```bash
+npm run dev
+```
+
+Stop active local dev processes started by the full stack:
+
+```bash
+npm run dev:kill
+```
+
+## Quality Checks
+
+Run the main checks before opening a pull request:
+
+```bash
+composer test
+composer analyse
+npm run lint
+npm run typecheck
+```
+
+Build production assets:
+
+```bash
+npm run build
+```
 
 
 > [!WARNING]

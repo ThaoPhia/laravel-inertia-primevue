@@ -3,6 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "dev:composer": "composer dev",
+        "dev:kill": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match 'composer(.bat|.phar)?\\s+dev|concurrently.*php artisan serve|php artisan (serve|queue:listen|typescript:transform)|vite' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }\"",
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "lint": "eslint . --fix",

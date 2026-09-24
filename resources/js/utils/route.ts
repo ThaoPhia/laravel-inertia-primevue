@@ -28,16 +28,16 @@ hash: string | number,
 'two-factor.secret-key': never,
 'two-factor.recovery-codes': never,
 'two-factor.regenerate-recovery-codes': never,
+welcome: never,
+dashboard: never,
 'profile.edit': never,
 'profile.update': never,
 'profile.destroy': never,
 'password.edit': never,
 'user-password.update': never,
 'two-factor.show': never,
-'boost.browser-logs': never,
-welcome: never,
-dashboard: never,
 appearance: never,
+'boost.browser-logs': never,
 };
 export function route<T extends keyof RouteParameters>(name: T, parameters?: [RouteParameters[T]] extends [never] ? Record<string, never> : RouteParameters[T], absolute: boolean = false): string {
     let url: string = '/' + routes[name]
@@ -79,14 +79,14 @@ const routes = {
     "two-factor.secret-key": "user/two-factor-secret-key",
     "two-factor.recovery-codes": "user/two-factor-recovery-codes",
     "two-factor.regenerate-recovery-codes": "user/two-factor-recovery-codes",
+    "welcome": "/",
+    "dashboard": "dashboard",
     "profile.edit": "settings/profile",
     "profile.update": "settings/profile",
     "profile.destroy": "settings/profile",
     "password.edit": "settings/password",
     "user-password.update": "settings/password",
     "two-factor.show": "settings/two-factor",
-    "boost.browser-logs": "_boost/browser-logs",
-    "welcome": "",
-    "dashboard": "dashboard",
-    "appearance": "settings/appearance"
+    "appearance": "settings/appearance",
+    "boost.browser-logs": "_boost/browser-logs"
 }
