@@ -172,7 +172,7 @@ const featureCards = [
                             v-animateonscroll.once="{ enterClass: heroHeadingEnterClass, threshold: [0.1], rootMargin: '0px 0px -8% 0px' }"
                             class="mt-8 max-w-4xl text-5xl font-semibold tracking-tight text-balance text-surface-950 sm:text-6xl lg:text-7xl dark:text-white dark:text-shadow-lg"
                         >
-                            Laravel + PrimeVue Starter Kit
+                            Laravel + PrimeVue Starter Kit TEST
                         </h1>
 
                         <p
