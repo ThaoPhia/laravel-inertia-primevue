@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTemplateRef, onMounted } from 'vue'
+import { useTemplateRef, onMounted, watch } from 'vue'
 import { useForm, Link as InertiaLink } from '@inertiajs/vue3'
 import GuestAuthLayout from '@/layouts/GuestAuthLayout.vue'
 import InputErrors from '@/components/InputErrors.vue'
@@ -31,6 +31,19 @@ onMounted(() => {
         emailInput.value.$el.focus()
     }
 })
+
+// Watch loginForm.errors to force all to be an array in case they are a string
+watch(
+    () => loginForm?.errors,
+    (newErrors: Record<string, string | string[]>) => {
+        for (const key in newErrors) {
+            if (typeof newErrors[key] === 'string') {
+                newErrors[key] = [newErrors[key] as string]
+            }
+        }
+    },
+    { deep: true }
+)
 </script>
 
 <template>
