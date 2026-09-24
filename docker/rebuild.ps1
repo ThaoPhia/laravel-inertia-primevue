@@ -1,0 +1,31 @@
+$ErrorActionPreference = 'Stop'
+
+function Get-EnvValue($name, $default) {
+    $line = Get-Content .env | Where-Object { $_ -match "^$name=" } | Select-Object -First 1
+    if ($line) {
+        return ($line -split '=', 2)[1].Trim()
+    }
+    return $default
+}
+
+$ImageName = Get-EnvValue 'DOCKER_IMAGE_NAME' 'laravel-inertia-primevue:latest'
+$ContainerName = Get-EnvValue 'DOCKER_CONTAINER_NAME' 'laravel-inertia-primevue'
+$VolumeName = Get-EnvValue 'DOCKER_VOLUME_NAME' 'laravel-inertia-primevue-sqlite'
+$Port = Get-EnvValue 'APP_PORT' '8000'
+
+Write-Host "Building image $ImageName..."
+docker build -t $ImageName .
+
+Write-Host "Stopping existing container (if running)..."
+docker stop $ContainerName 2>$null
+
+Write-Host "Removing existing container (if present)..."
+docker rm $ContainerName 2>$null
+
+Write-Host "Ensuring database volume exists..."
+docker volume create $VolumeName | Out-Null
+
+Write-Host "Starting container from new image..."
+docker run -d --name $ContainerName -p "${Port}:80" --env-file .env -v "${VolumeName}:/var/www/data" $ImageName
+
+Write-Host "Done. App is available at http://localhost:$Port"

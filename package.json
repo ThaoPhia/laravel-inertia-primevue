@@ -6,7 +6,8 @@
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
         "lint": "eslint . --fix",
-        "typecheck": "vue-tsc --noEmit"
+        "typecheck": "vue-tsc --noEmit",
+        "docker:rebuild": "powershell -ExecutionPolicy Bypass -File docker/rebuild.ps1"
     },
     "dependencies": {
         "@inertiajs/vue3": "^3.0.0",

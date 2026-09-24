@@ -55,10 +55,14 @@ COPY --from=assets /app/public/build ./public/build
 
 RUN rm -f bootstrap/cache/*.php \
     && php artisan package:discover --ansi \
-    && mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache \
-    && chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R ug+rwx storage bootstrap/cache
+    && mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache /var/www/data \
+    && chown -R www-data:www-data storage bootstrap/cache /var/www/data \
+    && chmod -R ug+rwx storage bootstrap/cache /var/www/data
+
+COPY docker/local/web/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 80
 
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["apache2-foreground"]
